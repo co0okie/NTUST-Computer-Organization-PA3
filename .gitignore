@@ -1,0 +1,13 @@
+*.cr.mti
+*.mpf
+*.wlf
+work/
+*.fst
+*.vvp
+*.out
+
+report/*
+!report/report.tex
+!report/report.pdf
+
+B11107051.zip
