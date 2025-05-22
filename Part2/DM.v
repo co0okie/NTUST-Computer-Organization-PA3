@@ -50,10 +50,11 @@ module DM (
 
 	always@(negedge clk)
 	begin
-	/*
-
-	Your Design.
-
-	*/	
+        if (MemWrite) {
+            DataMem[MemAddr], 
+            DataMem[MemAddr + 1], 
+            DataMem[MemAddr + 2], 
+            DataMem[MemAddr + 3]
+        } <= MemWriteData;
 	end
 endmodule

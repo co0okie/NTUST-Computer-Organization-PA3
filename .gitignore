@@ -5,9 +5,14 @@ work/
 *.fst
 *.vvp
 *.out
+constraint.sdc
+config.mk
+synth_stat.txt
+6_finish.rpt
 
 report/*
 !report/report.tex
 !report/report.pdf
+!report/image
 
 B11107051.zip

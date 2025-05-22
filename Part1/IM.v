@@ -43,9 +43,11 @@ module IM(
 	 * CAUTION: DONT MODIFY THE NAME AND SIZE.
 	 */
 	reg [7:0]InstrMem[0:`INSTR_MEM_SIZE - 1];
-    /*
-
-	Your Design.
-	
-	*/
+    
+    assign Instr = {
+        InstrMem[InstrAddr],
+        InstrMem[InstrAddr + 1],
+        InstrMem[InstrAddr + 2],
+        InstrMem[InstrAddr + 3]
+    };
 endmodule

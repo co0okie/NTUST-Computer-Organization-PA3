@@ -49,12 +49,11 @@ module RF (
 	 */
 	reg [31:0]R[0:`REG_MEM_SIZE - 1];
 
+    assign RsData = R[RsAddr];
+    assign RtData = R[RtAddr];
+    
 	always@(negedge clk)
 	begin
-	/*
-
-	Your Design.
-	
-	*/
+        if (RegWrite && RdAddr != 5'b0) R[RdAddr] <= RdData;
 	end
 endmodule
