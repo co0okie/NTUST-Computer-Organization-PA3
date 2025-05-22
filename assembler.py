@@ -55,7 +55,7 @@ def assemble_line(line, lineno):
     If the instruction is not valid, exits with an error.
     """
     # Remove comments (anything after '#' or '//')
-    line = line.split(';')[0].strip()
+    line = line.split('#')[0].strip()
     if line == "":
         return None  # skip empty line
 

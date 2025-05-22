@@ -3,7 +3,10 @@ OPENROAD = ~/OpenROAD-flow-scripts/flow
 OPENROAD_DESIGN = $(OPENROAD)/designs/nangate45/$(PROJECT)
 OPENROAD_REPORT = $(OPENROAD)/reports/nangate45/$(PROJECT)/base
 V = $(filter-out tb_%.v, $(wildcard *.v))
-ASM = main.asm
+# ASM = ../r_type.asm
+# ASM = ../i_type.asm
+ASM = ../stall.asm
+# ASM = ../forward.asm
 ASSEMBLER = ../assembler.py
 
 .PHONY: all run wave tb fst vvp im openroad_gui openroad clean
@@ -26,7 +29,7 @@ $(PROJECT).vvp: tb_$(PROJECT).v $(V)
 
 im: testbench/IM.dat
 
-testbench/IM.dat: $(ASM) $(ASSEMBLER)
+testbench/IM.dat: $(ASM) $(ASSEMBLER) makefile
 	python3 $(ASSEMBLER) $(ASM) $@
 
 openroad_gui: $(OPENROAD_REPORT)/6_finish.rpt $(OPENROAD_REPORT)/synth_stat.txt
