@@ -26,7 +26,7 @@
  * Macro of size declaration of data memory
  * CAUTION: DONT MODIFY THE NAME AND VALUE.
  */
-`define DATA_MEM_SIZE	32	// Bytes
+`define DATA_MEM_SIZE	8	// Bytes
 
 /*
  * Declaration of Data Memory for this project.
