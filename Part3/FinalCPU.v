@@ -74,20 +74,20 @@ module FinalCPU(
     wire Forward_1_MEM, Forward_2_MEM, Forward_1_WB, Forward_2_WB;
 
     wire [1:0] MEM_WB;
-    wire MEM_Reg_w = MEM_WB[1];
+    wire MEM_Reg_w, MEM_Mem_to_reg;
     wire MEM_M; 
     wire MEM_Mem_w = MEM_M;
     wire [31:0] MEM_ALU_result;
     wire [31:0] MEM_Mem_w_data;
     wire [4:0] MEM_RdAddr;
     wire [31:0] MEM_Mem_r_data;
+    wire [31:0] MEM_RdData;
 
-    wire [1:0] WB_WB;
-    wire WB_Reg_w, WB_Mem_to_reg;
+    wire WB_Reg_w;
     wire [31:0] WB_ALU_result;
     wire [31:0] WB_Mem_r_data;
     wire [4:0] WB_RdAddr;
-    wire [31:0] WB_RdData = WB_Mem_to_reg ? WB_Mem_r_data : WB_ALU_result;
+    wire [31:0] WB_RdData;
 
     assign Stall = (EX_Mem_r && (
         EX_RtAddr == ID_RsAddr ||
@@ -108,7 +108,8 @@ module FinalCPU(
         Forward_2_WB ? WB_RdData : EX_RtData;
     assign EX_ALU_Src_2 = EX_ALU_src ? EX_imm_extend : EX_Mem_w_data;
 
-    assign {WB_Reg_w, WB_Mem_to_reg} = WB_WB;
+    assign {MEM_Reg_w, MEM_Mem_to_reg} = MEM_WB;
+    assign MEM_RdData = MEM_Mem_to_reg ? MEM_Mem_r_data : MEM_ALU_result;
 
 	/* 
 	 * Declaration of Instruction Memory.
@@ -188,9 +189,9 @@ module FinalCPU(
         .clk(clk)
 	);
 
-    Pipeline_Register #(.size(71)) pipeline_MEM_WB (
-        .in({MEM_WB, MEM_ALU_result, MEM_Mem_r_data, MEM_RdAddr}),
-        .out({WB_WB, WB_ALU_result, WB_Mem_r_data, WB_RdAddr}),
+    Pipeline_Register #(.size(38)) pipeline_MEM_WB (
+        .in({MEM_Reg_w, MEM_RdData, MEM_RdAddr}),
+        .out({WB_Reg_w, WB_RdData, WB_RdAddr}),
         .clk(clk)
     );
 endmodule
