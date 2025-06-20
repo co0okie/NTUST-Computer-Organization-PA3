@@ -182,9 +182,9 @@ endmodule
     \end{lstlisting}
     以\texttt{MEM/WB}為例：
     \begin{lstlisting}[language=Verilog]
-Pipeline_Register #(.size(71)) pipeline_MEM_WB (
-    .in({MEM_WB, MEM_ALU_result, MEM_Mem_r_data, MEM_RdAddr}),
-    .out({WB_WB, WB_ALU_result, WB_Mem_r_data, WB_RdAddr}),
+Pipeline_Register #(.size(38)) pipeline_MEM_WB (
+    .in({MEM_Reg_w, MEM_RdData, MEM_RdAddr}),
+    .out({WB_Reg_w, WB_RdData, WB_RdAddr}),
     .clk(clk)
 );
     \end{lstlisting}
